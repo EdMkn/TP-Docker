@@ -1,0 +1,23 @@
+version: "3.7"
+services:
+ db:
+  image: postgres
+  restart: always
+  environment:
+   POSTGRES_USER: adex
+   POSTGRES_PASSWORD: adex
+   POSTGRES_DB: adex
+ app:
+  build: .
+  restart: always
+  ports:
+   - "5000:5000" 
+  environment:
+   DBUSER: adex
+   DBPASS: adex
+   DBHOST: db
+   DBNAME: adex
+   restart: always
+   FLASK_APP: app.py
+  depends_on:
+   - db

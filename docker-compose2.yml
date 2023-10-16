@@ -1,0 +1,39 @@
+version: "3.9"
+services:
+ app1:
+  build: . 
+  restart: always
+  ports:
+   - "5005:5000"
+  environment:
+   FLASK_ENV: development
+   DBUSER: adex1
+   DBPASS: adex
+   DBHOST: db
+   DBNAME: adex
+
+  depends_on:
+   - db
+ app2:
+  build: . 
+  restart: always
+  ports:
+   - "5006:5000"
+  environment:
+   FLASK_ENV: development
+   DBUSER: adex2
+   DBPASS: adex2
+   DBHOST: db
+   DBNAME: adex
+  depends_on:
+   - db
+ db:
+  image: "postgres"
+  volumes:
+   - ./init.sh:/docker-entrypoint-initdb.b/init.sh
+  environment:   
+   POSTGRES_DB: adex
+   POSTGRES_HOST: localhost
+   POSTGRES_USER: adex
+   POSTGRES_PASSWORD: adexone
+   restart: always

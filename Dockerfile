@@ -1,5 +1,5 @@
 FROM tiangolo/uwsgi-nginx-flask:python3.6
-workdir /app
+WORKDIR /app
 RUN apt update && apt install postgresql -y
 
 COPY . .
@@ -12,15 +12,11 @@ psql --command "CREATE USER groupex with SUPERUSER PASSWORD 'groupeX';" &&\
 createdb -O groupex groupex
 
 USER root
-expose 5000
+EXPOSE 5000
 ENV DBUSER=groupex
 ENV DBPASS=groupex
 ENV DBHOST=localhost
 ENV DBNAME=groupex
-
-ENV FLASK_APP=app.py
-RUN chmod 750 /docker-entrypoint.sh
-ENTRYPOINT ["/docker-entrypoint.sh"]
 
 ENV FLASK_APP=app.py
 RUN chmod 750  /docker-entrypoint.sh

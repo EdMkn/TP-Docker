@@ -8,7 +8,7 @@ services:
   environment:
    FLASK_ENV: development
    DBUSER: adex1
-   DBPASS: adex
+   DBPASS: adex1
    DBHOST: db
    DBNAME: adex
 
@@ -30,10 +30,9 @@ services:
  db:
   image: "postgres"
   volumes:
-   - ./init.sh:/docker-entrypoint-initdb.b/init.sh
+   - ./init.sh:/docker-entrypoint-initdb.d/init.sh
   environment:   
    POSTGRES_DB: adex
-   POSTGRES_HOST: localhost
    POSTGRES_USER: adex
    POSTGRES_PASSWORD: adexone
    restart: always

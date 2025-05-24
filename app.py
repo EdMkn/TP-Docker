@@ -34,7 +34,10 @@ def view_registered_guests():
 
 @app.route('/register', methods=['GET'])
 def view_registration_form():
-    return render_template('guest_registration.html')
+    if os.environ['DBUSER'] == "adex2":
+        return ("Erreur")
+    else:
+        return render_template('guest_registration.html')
 
 
 @app.route('/register', methods=['POST'])
